@@ -1,22 +1,48 @@
 const validator = require('validator');
 const chalk = require('chalk');
+const yargs = require('yargs');
 const log = console.log;
 const getNotes = require('./notes.js')
 
-const msg = getNotes();
-console.log(msg)
-console.log(validator.isEmail('everfavioat@gmail.com'));
-log(chalk.green.bold('Succes!!'))
+// customize yarg versions
 
+yargs.version('1.1.0')
 
-/*
-Challenge: Use the chalk library in your project
+// add, remove, read, list
+// create add command
+yargs.command({
+  command: 'add',
+  describe: 'add a new note',
+  handler: function () {
+    console.log('Adding a new note')
+  }
+})
 
-1. Install version 2.4.1 of chalk
-2. load chalk into app.js
-3. Use it to print the string "Success!!" to the console in green
-4. Test your work
+// create remove command
+yargs.command({
+  command: 'remove',
+  describe: 'Remove a note',
+  handler: function () {
+    console.log('Removing the note')
+  }
+})
 
-bonus: use docs to mess around with other styles. Make text bold and inversed.
+yargs.command({
+  command: 'read',
+  describe: 'Read a note',
+  handler: function () {
+    console.log('reading the note')
+  }
+})
 
-*/
+yargs.command({
+  command: 'list',
+  describe: 'listing notes',
+  handler: function () {
+    console.log('Listing all notes')
+  }
+})
+
+console.log(process.argv)
+console.log(yargs.argv)
+
