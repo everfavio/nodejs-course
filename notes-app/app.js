@@ -2,7 +2,8 @@ const validator = require('validator');
 const chalk = require('chalk');
 const yargs = require('yargs');
 const log = console.log;
-const getNotes = require('./notes.js')
+const getNotes = require('./notes.js');
+const { argv } = require('yargs');
 
 // customize yarg versions
 
@@ -13,9 +14,22 @@ yargs.version('1.1.0')
 yargs.command({
   command: 'add',
   describe: 'add a new note',
-  handler: function () {
-    console.log('Adding a new note')
-  }
+  builder: {
+    title: {
+      describe: 'Note title',
+      demandOption: true,
+      type: 'string',
+    },
+    body: {
+      describe: 'note description',
+      demandOption: true,
+      type: 'string',
+    },
+  },
+  handler: function (argv) {
+    console.log(argv)
+    console.log('Title: ' + argv.title)
+    console.log('body: ' + argv.body)  }
 })
 
 // create remove command
@@ -43,6 +57,5 @@ yargs.command({
   }
 })
 
-console.log(process.argv)
-console.log(yargs.argv)
-
+// console.log(process.argv)
+/// console.log(yargs.argv)
