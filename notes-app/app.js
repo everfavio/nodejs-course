@@ -2,7 +2,7 @@ const validator = require('validator');
 const chalk = require('chalk');
 const yargs = require('yargs');
 const log = console.log;
-const getNotes = require('./notes.js');
+const notes = require('./notes.js');
 const { argv } = require('yargs');
 
 // customize yarg versions
@@ -27,9 +27,8 @@ yargs.command({
     },
   },
   handler: function (argv) {
-    console.log(argv)
-    console.log('Title: ' + argv.title)
-    console.log('body: ' + argv.body)  }
+    return notes.addNotes(argv.title, argv.body)
+  }
 })
 
 // create remove command
@@ -57,5 +56,6 @@ yargs.command({
   }
 })
 
+yargs.parse()
 // console.log(process.argv)
 /// console.log(yargs.argv)
